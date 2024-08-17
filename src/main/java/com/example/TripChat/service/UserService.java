@@ -1,6 +1,6 @@
 package com.example.TripChat.service;
 
-import com.example.TripChat.entity.Users;
+import com.example.TripChat.entity.UsersEntity;
 import com.example.TripChat.repository.UserRepository;
 import com.example.TripChat.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public void registerUser(UserDTO userDTO) {
-        Users user = Users.builder()
+        UsersEntity user = UsersEntity.builder()
                 .username(userDTO.getUsername())
                 .password(passwordEncoder.encode(userDTO.getPassword()))
                 .email(userDTO.getEmail())
@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public UserDTO findByUsername(String username) {
-        Users user = userRepository.findByUsername(username);
+        UsersEntity user = userRepository.findByUsername(username);
         if (user != null) {
             return new UserDTO(user.getUsername(), user.getPassword(), user.getEmail(), user.getNationality());
         }

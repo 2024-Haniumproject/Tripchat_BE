@@ -1,6 +1,6 @@
 package com.example.TripChat.dto;
 
-import com.example.TripChat.enums.Nationality;
+import com.example.TripChat.entity.NationalityEnum;
 import lombok.*;
 
 @Getter
@@ -12,5 +12,5 @@ public class UserDTO {
     private String username;
     private String password;
     private String email;
-    private Nationality nationality;
+    private NationalityEnum nationality;
 }

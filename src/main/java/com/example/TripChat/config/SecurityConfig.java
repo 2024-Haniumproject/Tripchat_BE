@@ -24,16 +24,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/signup").permitAll()
                         .requestMatchers("/api/login").permitAll()
+                        .requestMatchers("/api/dialogflow/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/signup", "/api/login", "/api/logout"))
+                        .ignoringRequestMatchers("/api/signup", "/api/login", "/api/logout", "/api/dialogflow/**"))
                 .headers(headers -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/api/user/login")
-                        .defaultSuccessUrl("/")
-                        .permitAll())
+//                .formLogin(formLogin -> formLogin
+//                        .loginPage("/api/login")
+//                        .defaultSuccessUrl("/")
+//                        .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/api/logout")
                         .invalidateHttpSession(true)

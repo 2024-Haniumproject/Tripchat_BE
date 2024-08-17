@@ -1,7 +1,6 @@
 package com.example.TripChat.entity;
 
 
-import com.example.TripChat.enums.Nationality;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +9,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
+public class UsersEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +20,7 @@ public class Users {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private Nationality nationality;
+    private NationalityEnum nationality;
 
 }
 

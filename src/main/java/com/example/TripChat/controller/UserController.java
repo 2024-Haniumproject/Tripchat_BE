@@ -21,28 +21,28 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseDTO> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<ResponseDTO<String>> registerUser(@RequestBody UserDTO userDTO) {
         if (userService.findByUsername(userDTO.getUsername()) != null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "Username 이 이미 존재합니다."));
+                    .body(new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "Username 이 이미 존재합니다.", null));
         }
         userService.registerUser(userDTO);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new ResponseDTO(HttpStatus.OK.value(), "회원가입에 성공했습니다."));
+                .body(new ResponseDTO<>(HttpStatus.OK.value(), "회원가입에 성공했습니다.", null));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO> loginUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<ResponseDTO<String>> loginUser(@RequestBody UserDTO userDTO) {
         UserDTO foundUser = userService.findByUsername(userDTO.getUsername());
         if (foundUser != null && passwordEncoder.matches(userDTO.getPassword(), foundUser.getPassword())) {
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(new ResponseDTO(HttpStatus.OK.value(), "로그인에 성공했습니다."));
+                    .body(new ResponseDTO<>(HttpStatus.OK.value(), "로그인에 성공했습니다.", null));
         }
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new ResponseDTO(HttpStatus.BAD_REQUEST.value(), "username, password를 다시 확인해주세요!"));
+                .body(new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(), "username, password를 다시 확인해주세요!", null));
     }
 }
