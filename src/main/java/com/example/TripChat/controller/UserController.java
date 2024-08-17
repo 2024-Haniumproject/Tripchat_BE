@@ -2,7 +2,7 @@ package com.example.TripChat.controller;
 
 import com.example.TripChat.service.UserService;
 import com.example.TripChat.dto.ResponseDTO;
-import com.example.TripChat.dto.UserDTO;
+import com.example.TripChat.dto.UsersDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseDTO<String>> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<ResponseDTO<String>> registerUser(@RequestBody UsersDTO userDTO) {
         if (userService.findByUsername(userDTO.getUsername()) != null) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO<String>> loginUser(@RequestBody UserDTO userDTO) {
-        UserDTO foundUser = userService.findByUsername(userDTO.getUsername());
+    public ResponseEntity<ResponseDTO<String>> loginUser(@RequestBody UsersDTO userDTO) {
+        UsersDTO foundUser = userService.findByUsername(userDTO.getUsername());
         if (foundUser != null && passwordEncoder.matches(userDTO.getPassword(), foundUser.getPassword())) {
             return ResponseEntity
                     .status(HttpStatus.OK)
