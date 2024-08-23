@@ -6,6 +6,8 @@ import com.example.TripChat.repository.TripReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TripReviewService {
@@ -15,5 +17,9 @@ public class TripReviewService {
     public TripReviewEntity saveEntry(TripReviewDTO dto) {
         TripReviewEntity entity = new TripReviewEntity(dto.getUsername(), dto.getTitle(), dto.getContent(), dto.getCreateDate());
         return repository.save(entity);
+    }
+
+    public List<TripReviewEntity> getAllEntries() {
+        return repository.findAll();
     }
 }
