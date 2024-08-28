@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
 public class TripReviewDTO {
-    private final String username;  // 작성자
-    private final String title;  // 제목
-    private final String content;  // 내용
-    private final LocalDateTime createDate;  // 작성일
+    private final String username;
+    private final String title;
+    private final String content;
+    private final LocalDateTime createDate;
+
+    private final List<String> images; // 이미지 경로만 저장
 }
+
