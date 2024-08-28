@@ -25,9 +25,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/signup").permitAll()
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/dialogflow/**").permitAll()
+                        .requestMatchers("/api/tripreview/**").permitAll()
                         .anyRequest().authenticated())
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/api/signup", "/api/login", "/api/logout", "/api/dialogflow/**"))
+                        .ignoringRequestMatchers("/api/signup", "/api/login", "/api/logout", "/api/dialogflow/**", "/api/tripreview/**"))
                 .headers(headers -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
@@ -56,3 +57,4 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
+
