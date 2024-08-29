@@ -19,8 +19,14 @@ public class DialogflowResponseDTO {
     private double rating;
     private String imageUrl;
     private String hours;
-    private String closed_On;
+    private String closedOn;
     private String googleMapsLink;
+
+    private String location; //위치
+    private String Booking; //예약 사이트
+    private String stars; //몇성급 호텔
+
+    private String averagePrice; //호텔 가격
 
     public static DialogflowResponseDTO fromEntity(DialogflowEntity entity) {
         return new DialogflowResponseDTO(
@@ -32,6 +38,10 @@ public class DialogflowResponseDTO {
                 null,
                 null,
                 0.0,
+                null,
+                null,
+                null,
+                null,
                 null,
                 null,
                 null,
@@ -52,7 +62,12 @@ public class DialogflowResponseDTO {
                 mongoResponse.getResponse().getImageUrl(),
                 mongoResponse.getResponse().getHours(),
                 mongoResponse.getResponse().getClosedOn(),
-                mongoResponse.getResponse().getGoogleMapsLink()
+                mongoResponse.getResponse().getGoogleMapsLink(),
+
+                mongoResponse.getResponse().getLocation(),
+                mongoResponse.getResponse().getBooking(),
+                mongoResponse.getResponse().getStars(),
+                mongoResponse.getResponse().getAveragePrice()
         );
     }
 }
